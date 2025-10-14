@@ -637,6 +637,198 @@ class AccessibilityManager {
   }
 }
 
+// ===== WHATSAPP INTEGRATION =====
+class WhatsAppManager {
+  constructor() {
+    this.whatsappButton = document.getElementById('whatsapp-button');
+    this.whatsappFloat = document.getElementById('whatsapp-float');
+    this.whatsappTooltip = document.getElementById('whatsapp-tooltip');
+    
+    // WhatsApp configuration
+    this.whatsappNumber = '+5073914481'; // Número principal de Galenus Panamá
+    this.defaultMessage = 'Hola! Me gustaría obtener más información sobre los servicios de Galenus Panamá.';
+    
+    this.init();
+  }
+
+  init() {
+    this.bindEvents();
+    this.setupTooltip();
+  }
+
+  bindEvents() {
+    if (this.whatsappButton) {
+      this.whatsappButton.addEventListener('click', () => this.openWhatsApp());
+      
+      // Add keyboard support
+      this.whatsappButton.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.openWhatsApp();
+        }
+      });
+    }
+  }
+
+  setupTooltip() {
+    if (this.whatsappTooltip) {
+      // Show tooltip on hover with delay
+      let showTimeout;
+      let hideTimeout;
+
+      this.whatsappFloat.addEventListener('mouseenter', () => {
+        clearTimeout(hideTimeout);
+        showTimeout = setTimeout(() => {
+          this.whatsappTooltip.style.opacity = '1';
+          this.whatsappTooltip.style.visibility = 'visible';
+          this.whatsappTooltip.style.transform = 'translateX(-50%) translateY(-5px)';
+        }, 500);
+      });
+
+      this.whatsappFloat.addEventListener('mouseleave', () => {
+        clearTimeout(showTimeout);
+        hideTimeout = setTimeout(() => {
+          this.whatsappTooltip.style.opacity = '0';
+          this.whatsappTooltip.style.visibility = 'hidden';
+          this.whatsappTooltip.style.transform = 'translateX(-50%)';
+        }, 200);
+      });
+    }
+  }
+
+  openWhatsApp() {
+    // Get current page information for context
+    const currentPage = this.getCurrentPageContext();
+    const message = this.buildWhatsAppMessage(currentPage);
+    
+    // Create WhatsApp URL
+    const whatsappUrl = this.buildWhatsAppUrl(message);
+    
+    // Open WhatsApp
+    this.openWhatsAppWindow(whatsappUrl);
+    
+    // Track the interaction (for analytics if needed)
+    this.trackWhatsAppClick(currentPage);
+  }
+
+  getCurrentPageContext() {
+    const currentSection = this.getCurrentSection();
+    const pageTitle = document.title;
+    
+    return {
+      section: currentSection,
+      title: pageTitle,
+      url: window.location.href
+    };
+  }
+
+  getCurrentSection() {
+    const sections = document.querySelectorAll('section[id]');
+    const scrollY = window.scrollY;
+    
+    for (let section of sections) {
+      const sectionTop = section.offsetTop - 100;
+      const sectionHeight = section.offsetHeight;
+      
+      if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+        return section.getAttribute('id');
+      }
+    }
+    
+    return 'home';
+  }
+
+  buildWhatsAppMessage(context) {
+    let message = this.defaultMessage;
+    
+    // Customize message based on current section
+    switch (context.section) {
+      case 'services':
+        message = 'Hola! Me interesa conocer más sobre los servicios farmacéuticos de Galenus Panamá.';
+        break;
+      case 'products':
+        message = 'Hola! Quisiera información sobre los medicamentos y productos disponibles en Galenus Panamá.';
+        break;
+      case 'contact':
+        message = 'Hola! Me gustaría contactar con Galenus Panamá para una consulta.';
+        break;
+      case 'about':
+        message = 'Hola! Me interesa conocer más sobre Galenus Panamá y sus servicios.';
+        break;
+      default:
+        message = this.defaultMessage;
+    }
+    
+    // Add page context if needed
+    if (context.section !== 'home') {
+      message += `\n\n(Estoy viendo la sección: ${this.getSectionName(context.section)})`;
+    }
+    
+    return encodeURIComponent(message);
+  }
+
+  getSectionName(sectionId) {
+    const sectionNames = {
+      'home': 'Inicio',
+      'about': 'Nosotros',
+      'services': 'Servicios',
+      'products': 'Productos',
+      'contact': 'Contacto'
+    };
+    
+    return sectionNames[sectionId] || sectionId;
+  }
+
+  buildWhatsAppUrl(message) {
+    // Format phone number (remove any non-digit characters except +)
+    const cleanNumber = this.whatsappNumber.replace(/[^\d+]/g, '');
+    
+    // Build WhatsApp URL
+    return `https://wa.me/${cleanNumber}?text=${message}`;
+  }
+
+  openWhatsAppWindow(url) {
+    // Check if it's a mobile device
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    if (isMobile) {
+      // On mobile, try to open WhatsApp app directly
+      window.location.href = url;
+    } else {
+      // On desktop, open in new tab
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
+  }
+
+  trackWhatsAppClick(context) {
+    // You can implement analytics tracking here
+    console.log('WhatsApp click tracked:', {
+      section: context.section,
+      timestamp: new Date().toISOString(),
+      userAgent: navigator.userAgent
+    });
+    
+    // Example: Google Analytics event tracking
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'whatsapp_click', {
+        'event_category': 'engagement',
+        'event_label': context.section,
+        'value': 1
+      });
+    }
+  }
+
+  // Method to update WhatsApp number if needed
+  updateWhatsAppNumber(newNumber) {
+    this.whatsappNumber = newNumber;
+  }
+
+  // Method to update default message
+  updateDefaultMessage(newMessage) {
+    this.defaultMessage = newMessage;
+  }
+}
+
 // ===== INITIALIZATION =====
 document.addEventListener('DOMContentLoaded', () => {
   // Initialize all components
@@ -649,6 +841,7 @@ document.addEventListener('DOMContentLoaded', () => {
   new PerformanceOptimizer();
   new PWAManager();
   new AccessibilityManager();
+  new WhatsAppManager();
   
   console.log('Galenus Panamá website initialized successfully!');
 });
