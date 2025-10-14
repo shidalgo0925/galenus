@@ -79,34 +79,80 @@
         <section class="hero section" id="home">
             <div class="hero__container container">
                 <div class="hero__content">
+                    <div class="hero__badge">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Farmacia Certificada</span>
+                    </div>
                     <h1 class="hero__title">
-                        Soluciones Farmacéuticas 
-                        <span class="hero__title-accent">Innovadoras</span>
+                        Tu salud. <span class="hero__title-accent">Nuestra prioridad.</span>
                     </h1>
-                    <p class="hero__description">
-                        En Galenus Panamá, nos comprometemos a brindar medicamentos de la más alta calidad 
-                        y servicios farmacéuticos profesionales para mejorar la salud y bienestar de nuestra comunidad.
-                    </p>
+                    <h2 class="hero__subtitle">
+                        100% pura <br>
+                        <span class="highlight">Farmacia.</span>
+                    </h2>
                     <div class="hero__buttons">
-                        <a href="#services" class="btn btn--primary">
-                            <span>Nuestros Servicios</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
-                        <a href="#contact" class="btn btn--outline">
-                            <span>Contactar</span>
+                        <a href="#contact" class="btn btn--primary">
+                            <span>Contáctanos</span>
                             <i class="fas fa-phone"></i>
                         </a>
                     </div>
                 </div>
                 
-                <div class="hero__image">
-                    <div class="hero__image-container">
-                        <div class="hero__image-bg"></div>
-                        <div class="hero__image-content">
-                            <i class="fas fa-pills"></i>
-                            <i class="fas fa-heartbeat"></i>
-                            <i class="fas fa-user-md"></i>
+                <div class="hero__carousel">
+                    <div class="carousel__container">
+                        <div class="carousel__slide active" data-bg="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+                            <div class="carousel__content">
+                                <div class="carousel__badge">Ahorra 20%</div>
+                                <h3 class="carousel__title">En Desinfectantes</h3>
+                                <p class="carousel__description">99.9% Protección contra Gérmenes</p>
+                                <a href="#products" class="btn btn--carousel">Comprar Ahora</a>
+                            </div>
                         </div>
+                        
+                        <div class="carousel__slide" data-bg="https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+                            <div class="carousel__content">
+                                <div class="carousel__badge">Ahorra hasta 15%</div>
+                                <h3 class="carousel__title">Mascarillas de Protección</h3>
+                                <p class="carousel__description">Protección COVID-19</p>
+                                <a href="#products" class="btn btn--carousel">Comprar Ahora</a>
+                            </div>
+                        </div>
+                        
+                        <div class="carousel__slide" data-bg="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+                            <div class="carousel__content">
+                                <div class="carousel__badge">24/7 Disponible</div>
+                                <h3 class="carousel__title">Mejor Calidad</h3>
+                                <p class="carousel__description">Farmacia Galenus</p>
+                                <a href="#about" class="btn btn--carousel">Conocer Más</a>
+                            </div>
+                        </div>
+                        
+                        <div class="carousel__slide" data-bg="https://images.unsplash.com/photo-1576671081837-49000212a370?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+                            <div class="carousel__content">
+                                <div class="carousel__badge">Nuevo</div>
+                                <h3 class="carousel__title">Vitaminas y Suplementos</h3>
+                                <p class="carousel__description">Para tu bienestar diario</p>
+                                <a href="#products" class="btn btn--carousel">Ver Productos</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Carousel Navigation -->
+                    <div class="carousel__nav">
+                        <button class="carousel__btn carousel__btn--prev">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="carousel__btn carousel__btn--next">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Carousel Indicators -->
+                    <div class="carousel__indicators">
+                        <button class="carousel__indicator active" data-slide="0"></button>
+                        <button class="carousel__indicator" data-slide="1"></button>
+                        <button class="carousel__indicator" data-slide="2"></button>
+                        <button class="carousel__indicator" data-slide="3"></button>
                     </div>
                 </div>
             </div>
@@ -201,21 +247,46 @@
                 <div class="services__grid">
                     <div class="service-card">
                         <div class="service-card__icon">
-                            <i class="fas fa-pills"></i>
+                            <i class="fas fa-laptop-medical"></i>
                         </div>
-                        <h3 class="service-card__title">Venta de Medicamentos</h3>
+                        <h3 class="service-card__title">Farmacia Online</h3>
                         <p class="service-card__description">
-                            Amplio catálogo de medicamentos de prescripción y de venta libre, 
-                            con asesoramiento profesional.
+                            Compra tus medicamentos desde la comodidad de tu hogar con entrega a domicilio.
                         </p>
-                        <ul class="service-card__features">
-                            <li>Medicamentos de prescripción</li>
-                            <li>Productos de venta libre</li>
-                            <li>Medicamentos genéricos</li>
-                            <li>Productos especializados</li>
-                        </ul>
                     </div>
                     
+                    <div class="service-card">
+                        <div class="service-card__icon">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <h3 class="service-card__title">Suministro de Medicamentos</h3>
+                        <p class="service-card__description">
+                            Amplio inventario de medicamentos de prescripción y venta libre siempre disponible.
+                        </p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-card__icon">
+                            <i class="fas fa-shield-virus"></i>
+                        </div>
+                        <h3 class="service-card__title">Suministros Médicos COVID-19</h3>
+                        <p class="service-card__description">
+                            Mascarillas, desinfectantes y equipos de protección personal de la más alta calidad.
+                        </p>
+                    </div>
+                    
+                    <!--
+                    <div class="service-card">
+                        <div class="service-card__icon">
+                            <i class="fas fa-stethoscope"></i>
+                        </div>
+                        <h3 class="service-card__title">Equipos Médicos</h3>
+                        <p class="service-card__description">
+                            Monitores de presión arterial, termómetros y equipos de monitoreo para el hogar.
+                        </p>
+                    </div>
+                    -->
+
                     <div class="service-card">
                         <div class="service-card__icon">
                             <i class="fas fa-user-md"></i>
@@ -270,11 +341,11 @@
             </div>
         </section>
 
-        <!-- Products Section -->
+        <!-- Products Section 
         <section class="products section" id="products">
             <div class="container">
                 <div class="section__header">
-                    <h2 class="section__title">Nuestros Productos</h2>
+                    <h2 class="section__title">Productos Destacados</h2>
                     <p class="section__subtitle">
                         Medicamentos y productos de salud de las mejores marcas
                     </p>
@@ -282,36 +353,122 @@
                 
                 <div class="products__categories">
                     <button class="category-btn active" data-category="all">Todos</button>
-                    <button class="category-btn" data-category="prescription">Prescripción</button>
-                    <button class="category-btn" data-category="otc">Venta Libre</button>
-                    <button class="category-btn" data-category="vitamins">Vitaminas</button>
-                    <button class="category-btn" data-category="specialty">Especializados</button>
+                    <button class="category-btn" data-category="equipment">Equipos Médicos</button>
+                    <button class="category-btn" data-category="medicine">Medicina y Salud</button>
+                    <button class="category-btn" data-category="personal">Cuidado Personal</button>
+                    <button class="category-btn" data-category="baby">Cuidado del Bebé</button>
                 </div>
                 
                 <div class="products__grid">
-                    <div class="product-card" data-category="prescription">
+                    <div class="product-card" data-category="personal">
+                        <div class="product-card__discount">-20%</div>
+                        <div class="product-card__image">
+                            <i class="fas fa-mask"></i>
+                        </div>
+                        <div class="product-card__content">
+                            <h3 class="product-card__title">Mascarilla Facial</h3>
+                            <div class="product-card__price">
+                                <span class="price-current">$45.00</span>
+                            </div>
+                            <button class="btn btn--product">Agregar al Carrito</button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card" data-category="equipment">
+                        <div class="product-card__discount">-20%</div>
+                        <div class="product-card__image">
+                            <i class="fas fa-thermometer-half"></i>
+                        </div>
+                        <div class="product-card__content">
+                            <h3 class="product-card__title">Termómetro Digital</h3>
+                            <div class="product-card__price">
+                                <span class="price-current">$45.00</span>
+                            </div>
+                            <button class="btn btn--product">Agregar al Carrito</button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card" data-category="medicine">
+                        <div class="product-card__discount">-20%</div>
                         <div class="product-card__image">
                             <i class="fas fa-pills"></i>
                         </div>
                         <div class="product-card__content">
-                            <h3 class="product-card__title">Medicamentos de Prescripción</h3>
-                            <p class="product-card__description">
-                                Medicamentos que requieren receta médica, con asesoramiento profesional.
-                            </p>
-                            <div class="product-card__badge">Requiere Receta</div>
+                            <h3 class="product-card__title">Vitamina D3</h3>
+                            <div class="product-card__price">
+                                <span class="price-current">$25.00</span>
+                            </div>
+                            <button class="btn btn--product">Agregar al Carrito</button>
                         </div>
                     </div>
                     
-                    <div class="product-card" data-category="otc">
+                    <div class="product-card" data-category="equipment">
+                        <div class="product-card__discount">-10%</div>
                         <div class="product-card__image">
-                            <i class="fas fa-first-aid"></i>
+                            <i class="fas fa-tint"></i>
                         </div>
                         <div class="product-card__content">
-                            <h3 class="product-card__title">Medicamentos de Venta Libre</h3>
-                            <p class="product-card__description">
-                                Productos para el alivio de síntomas comunes y cuidado de la salud.
-                            </p>
-                            <div class="product-card__badge">Venta Libre</div>
+                            <h3 class="product-card__title">Monitor de Glucosa</h3>
+                            <div class="product-card__price">
+                                <span class="price-current">$45.00</span>
+                            </div>
+                            <button class="btn btn--product">Agregar al Carrito</button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card" data-category="personal">
+                        <div class="product-card__discount">-20%</div>
+                        <div class="product-card__image">
+                            <i class="fas fa-hand-sparkles"></i>
+                        </div>
+                        <div class="product-card__content">
+                            <h3 class="product-card__title">Desinfectante de Manos</h3>
+                            <div class="product-card__price">
+                                <span class="price-current">$30.00</span>
+                            </div>
+                            <button class="btn btn--product">Agregar al Carrito</button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card" data-category="medicine">
+                        <div class="product-card__discount">-20%</div>
+                        <div class="product-card__image">
+                            <i class="fas fa-capsules"></i>
+                        </div>
+                        <div class="product-card__content">
+                            <h3 class="product-card__title">Vitamina C</h3>
+                            <div class="product-card__price">
+                                <span class="price-current">$45.00</span>
+                            </div>
+                            <button class="btn btn--product">Agregar al Carrito</button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card" data-category="equipment">
+                        <div class="product-card__discount">-20%</div>
+                        <div class="product-card__image">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <div class="product-card__content">
+                            <h3 class="product-card__title">Monitor de Presión</h3>
+                            <div class="product-card__price">
+                                <span class="price-current">$45.00</span>
+                            </div>
+                            <button class="btn btn--product">Agregar al Carrito</button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card" data-category="personal">
+                        <div class="product-card__discount">-20%</div>
+                        <div class="product-card__image">
+                            <i class="fas fa-mask"></i>
+                        </div>
+                        <div class="product-card__content">
+                            <h3 class="product-card__title">Mascarilla Desechable</h3>
+                            <div class="product-card__price">
+                                <span class="price-current">$45.00</span>
+                            </div>
+                            <button class="btn btn--product">Agregar al Carrito</button>
                         </div>
                     </div>
                     
@@ -339,6 +496,39 @@
                             </p>
                             <div class="product-card__badge">Especializado</div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+
+        <!-- Features Section -->
+        <section class="features section">
+            <div class="container">
+                <div class="features__container">
+                    <div class="feature-card">
+                        <div class="feature__icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <h3 class="feature__title">Compra Online o en Tienda</h3>
+                        <p class="feature__description">Obtén</p>
+                        <div class="feature__highlight">GRATIS</div>
+                        <h4 class="feature__subtitle">Entrega a tu Puerta</h4>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature__icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3 class="feature__title">Disponible 24/7</h3>
+                        <p class="feature__description">Servicio de emergencia farmacéutica disponible las 24 horas del día, los 7 días de la semana.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature__icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="feature__title">Calidad Garantizada</h3>
+                        <p class="feature__description">Todos nuestros medicamentos son auténticos y provienen de distribuidores certificados.</p>
                     </div>
                 </div>
             </div>
@@ -463,53 +653,44 @@
                     <img src="logo.svg" alt="Galenus Panamá" class="footer__logo" id="footer-logo">
                     <h3 class="footer__brand-text">Galenus Panamá</h3>
                     <p class="footer__description">
-                        Soluciones farmacéuticas innovadoras para una mejor calidad de vida.
+                        Centro Médico Los Galenos, Ciudad de Panamá
                     </p>
-                    <div class="footer__social">
-                        <a href="#" class="footer__social-link" aria-label="Facebook">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="footer__social-link" aria-label="Instagram">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="footer__social-link" aria-label="WhatsApp">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
-                        <a href="#" class="footer__social-link" aria-label="LinkedIn">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
+                    <div class="footer__contact">
+                        <p><i class="fas fa-phone"></i> +507 391-4481</p>
+                        <p><i class="fas fa-envelope"></i> info@galenuspanama.com</p>
                     </div>
                 </div>
                 
                 <div class="footer__links">
                     <div class="footer__column">
-                        <h4 class="footer__title">Enlaces Rápidos</h4>
+                        <h4 class="footer__title">Explorar</h4>
                         <ul class="footer__list">
                             <li><a href="#home" class="footer__link">Inicio</a></li>
                             <li><a href="#about" class="footer__link">Nosotros</a></li>
                             <li><a href="#services" class="footer__link">Servicios</a></li>
                             <li><a href="#products" class="footer__link">Productos</a></li>
+                            <li><a href="#contact" class="footer__link">Contacto</a></li>
                         </ul>
                     </div>
                     
                     <div class="footer__column">
-                        <h4 class="footer__title">Servicios</h4>
+                        <h4 class="footer__title">Enlaces</h4>
                         <ul class="footer__list">
-                            <li><a href="#" class="footer__link">Venta de Medicamentos</a></li>
-                            <li><a href="#" class="footer__link">Consultas Farmacéuticas</a></li>
-                            <li><a href="#" class="footer__link">Servicios de Salud</a></li>
-                            <li><a href="#" class="footer__link">Entrega a Domicilio</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="footer__column">
-                        <h4 class="footer__title">Información</h4>
-                        <ul class="footer__list">
+                            <li><a href="#" class="footer__link">Hacer Cita</a></li>
+                            <li><a href="#" class="footer__link">Consulta Gratuita</a></li>
+                            <li><a href="#" class="footer__link">Preguntas Frecuentes</a></li>
                             <li><a href="#" class="footer__link">Política de Privacidad</a></li>
                             <li><a href="#" class="footer__link">Términos y Condiciones</a></li>
-                            <li><a href="#" class="footer__link">Política de Devoluciones</a></li>
-                            <li><a href="#" class="footer__link">Preguntas Frecuentes</a></li>
                         </ul>
+                    </div>
+                    
+                    <div class="footer__column">
+                        <h4 class="footer__title">Suscribirse</h4>
+                        <p class="footer__description">Suscríbete para recibir las últimas noticias de nosotros.</p>
+                        <div class="footer__subscribe">
+                            <input type="email" placeholder="Tu email" class="footer__input">
+                            <button class="btn btn--primary">Suscribirse</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -518,29 +699,62 @@
                 <p class="footer__copyright">
                     &copy; 2024 Galenus Panamá. Todos los derechos reservados.
                 </p>
-                <p class="footer__disclaimer">
-                    Los medicamentos deben ser utilizados bajo supervisión médica. 
-                    Consulte siempre con su médico o farmacéutico.
-                </p>
             </div>
         </div>
     </footer>
 
-    <!-- WhatsApp Button -->
-    <div class="whatsapp-float" id="whatsapp-float">
-        <div class="whatsapp-button" id="whatsapp-button" aria-label="Chatea con nosotros por WhatsApp">
-            <i class="fab fa-whatsapp"></i>
-        </div>
-        <div class="whatsapp-tooltip" id="whatsapp-tooltip">
-            <span>¿Necesitas ayuda? ¡Chatea con nosotros!</span>
-            <div class="whatsapp-tooltip-arrow"></div>
-        </div>
-    </div>
 
     <!-- Back to Top Button -->
     <button class="back-to-top" id="back-to-top" aria-label="Volver arriba">
         <i class="fas fa-arrow-up"></i>
     </button>
+
+    <!-- Chatbot -->
+    <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-header">
+            <div class="chatbot-avatar charlie-avatar">
+                <div class="bot-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+            </div>
+            <div class="chatbot-info">
+                <h4>Charlie Pity Assistant</h4>
+                <span class="status">En línea</span>
+            </div>
+            <button class="chatbot-close" id="chatbotClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="message bot-message">
+                <div class="message-content">
+                    <p>¡Hola! 👋 Soy Charlie Pity Assistant, el asistente virtual de Galenus Panamá. Puedo responder tus preguntas sobre medicamentos, servicios farmacéuticos o conectarte directamente con nuestro equipo por WhatsApp para consultas específicas. ¿En qué puedo ayudarte?</p>
+                </div>
+                <div class="message-time">Ahora</div>
+            </div>
+        </div>
+        
+        <div class="chatbot-quick-questions">
+            <button class="quick-question" data-question="servicios">¿Qué servicios ofrecen?</button>
+            <button class="quick-question" data-question="medicamentos">Consulta sobre medicamentos</button>
+            <button class="quick-question" data-question="entrega">Servicio de entrega</button>
+            <button class="quick-question" data-question="contacto">Contactar farmacia</button>
+        </div>
+        
+        <div class="chatbot-input">
+            <input type="text" id="chatbotInput" placeholder="Escribe tu mensaje...">
+            <button id="chatbotSend">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Chatbot Toggle Button -->
+    <div class="chatbot-toggle" id="chatbotToggle">
+        <i class="fas fa-robot"></i>
+        <span class="chatbot-badge">CP</span>
+    </div>
 
     <!-- Scripts -->
     <script src="script.js"></script>

@@ -829,6 +829,402 @@ class WhatsAppManager {
   }
 }
 
+
+// ===== CAROUSEL FUNCTIONALITY =====
+class CarouselManager {
+  constructor() {
+    this.slides = document.querySelectorAll('.carousel__slide');
+    this.indicators = document.querySelectorAll('.carousel__indicator');
+    this.prevBtn = document.querySelector('.carousel__btn--prev');
+    this.nextBtn = document.querySelector('.carousel__btn--next');
+    this.currentSlide = 0;
+    this.autoPlayInterval = null;
+    this.autoPlayDelay = 5000; // 5 seconds
+    
+    this.init();
+  }
+  
+  init() {
+    if (this.slides.length === 0) return;
+    
+    this.setupSlides();
+    this.bindEvents();
+    this.startAutoPlay();
+    console.log('Carousel initialized! 🎠');
+  }
+  
+  setupSlides() {
+    // Set background images for slides
+    this.slides.forEach((slide, index) => {
+      const bgImage = slide.getAttribute('data-bg');
+      if (bgImage) {
+        slide.style.backgroundImage = `url(${bgImage})`;
+      }
+    });
+  }
+  
+  bindEvents() {
+    // Navigation buttons
+    if (this.prevBtn) {
+      this.prevBtn.addEventListener('click', () => this.previousSlide());
+    }
+    
+    if (this.nextBtn) {
+      this.nextBtn.addEventListener('click', () => this.nextSlide());
+    }
+    
+    // Indicators
+    this.indicators.forEach((indicator, index) => {
+      indicator.addEventListener('click', () => this.goToSlide(index));
+    });
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') this.previousSlide();
+      if (e.key === 'ArrowRight') this.nextSlide();
+    });
+    
+    // Pause auto-play on hover
+    const carousel = document.querySelector('.hero__carousel');
+    if (carousel) {
+      carousel.addEventListener('mouseenter', () => this.stopAutoPlay());
+      carousel.addEventListener('mouseleave', () => this.startAutoPlay());
+    }
+    
+    // Touch/swipe support for mobile
+    this.addTouchSupport();
+  }
+  
+  addTouchSupport() {
+    const carousel = document.querySelector('.hero__carousel');
+    if (!carousel) return;
+    
+    let startX = 0;
+    let endX = 0;
+    
+    carousel.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+    });
+    
+    carousel.addEventListener('touchend', (e) => {
+      endX = e.changedTouches[0].clientX;
+      this.handleSwipe(startX, endX);
+    });
+  }
+  
+  handleSwipe(startX, endX) {
+    const threshold = 50;
+    const diff = startX - endX;
+    
+    if (Math.abs(diff) > threshold) {
+      if (diff > 0) {
+        this.nextSlide();
+      } else {
+        this.previousSlide();
+      }
+    }
+  }
+  
+  goToSlide(index) {
+    if (index < 0 || index >= this.slides.length) return;
+    
+    // Remove active class from current slide and indicator
+    this.slides[this.currentSlide].classList.remove('active');
+    this.indicators[this.currentSlide].classList.remove('active');
+    
+    // Set new current slide
+    this.currentSlide = index;
+    
+    // Add active class to new slide and indicator
+    this.slides[this.currentSlide].classList.add('active');
+    this.indicators[this.currentSlide].classList.add('active');
+    
+    // Reset auto-play
+    this.resetAutoPlay();
+  }
+  
+  nextSlide() {
+    const nextIndex = (this.currentSlide + 1) % this.slides.length;
+    this.goToSlide(nextIndex);
+  }
+  
+  previousSlide() {
+    const prevIndex = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
+    this.goToSlide(prevIndex);
+  }
+  
+  startAutoPlay() {
+    this.stopAutoPlay();
+    this.autoPlayInterval = setInterval(() => {
+      this.nextSlide();
+    }, this.autoPlayDelay);
+  }
+  
+  stopAutoPlay() {
+    if (this.autoPlayInterval) {
+      clearInterval(this.autoPlayInterval);
+      this.autoPlayInterval = null;
+    }
+  }
+  
+  resetAutoPlay() {
+    this.stopAutoPlay();
+    this.startAutoPlay();
+  }
+}
+
+// ===== ENHANCED ANIMATIONS =====
+class EnhancedAnimations {
+  constructor() {
+    this.init();
+  }
+  
+  init() {
+    this.setupScrollAnimations();
+    this.setupCounterAnimations();
+    this.setupParallaxEffects();
+    console.log('Enhanced Animations initialized! ✨');
+  }
+  
+  setupScrollAnimations() {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-in');
+        }
+      });
+    }, observerOptions);
+    
+    // Observe elements for animation
+    document.querySelectorAll('.service-card, .product-card, .contact__item').forEach(el => {
+      observer.observe(el);
+    });
+  }
+  
+  setupCounterAnimations() {
+    const counters = document.querySelectorAll('.stat__number');
+    
+    counters.forEach(counter => {
+      const target = parseInt(counter.textContent.replace(/\D/g, ''));
+      const duration = 2000;
+      const increment = target / (duration / 16);
+      let current = 0;
+      
+      const updateCounter = () => {
+        if (current < target) {
+          current += increment;
+          counter.textContent = Math.floor(current) + (counter.textContent.includes('+') ? '+' : '');
+          requestAnimationFrame(updateCounter);
+        } else {
+          counter.textContent = target + (counter.textContent.includes('+') ? '+' : '');
+        }
+      };
+      
+      // Start animation when element is in view
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
+            entry.target.classList.add('animated');
+            updateCounter();
+          }
+        });
+      }, { threshold: 0.5 });
+      
+      observer.observe(counter);
+    });
+  }
+  
+  setupParallaxEffects() {
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const parallaxElements = document.querySelectorAll('.floating__element');
+      
+      parallaxElements.forEach((element, index) => {
+        const speed = 0.5 + (index * 0.1);
+        const yPos = -(scrolled * speed);
+        element.style.transform = `translateY(${yPos}px)`;
+      });
+    });
+  }
+}
+
+// ===== CHATBOT FUNCTIONALITY =====
+class ChatbotManager {
+  constructor() {
+    this.chatbotToggle = document.getElementById('chatbotToggle');
+    this.chatbotContainer = document.getElementById('chatbotContainer');
+    this.chatbotClose = document.getElementById('chatbotClose');
+    this.chatbotInput = document.getElementById('chatbotInput');
+    this.chatbotSend = document.getElementById('chatbotSend');
+    this.chatbotMessages = document.getElementById('chatbotMessages');
+    this.quickQuestions = document.querySelectorAll('.quick-question');
+    
+    // Chatbot responses adapted for Galenus
+    this.responses = {
+      servicios: "Ofrecemos venta de medicamentos, consultas farmacéuticas, servicios de salud (medición de presión arterial, glucosa) y entrega a domicilio. ¿Te interesa algún servicio en particular?",
+      medicamentos: "Tenemos un amplio catálogo de medicamentos de prescripción y venta libre, vitaminas y suplementos. Para consultas específicas sobre medicamentos, te recomiendo hablar con nuestro farmacéutico. ¿Te conecto por WhatsApp?",
+      entrega: "Ofrecemos servicio de entrega a domicilio en 24 horas con embalaje seguro y seguimiento en tiempo real. ¿Te gustaría solicitar una entrega?",
+      contacto: "Para consultas específicas, te recomiendo contactarnos por WhatsApp (+507 391-4481) donde nuestro equipo farmacéutico te responderá inmediatamente. ¿Te conecto ahora?",
+      ubicacion: "Estamos ubicados en Centro Médico Los Galenos, Ciudad de Panamá. Ofrecemos servicios presenciales y entrega a domicilio.",
+      horarios: "Nuestros horarios son: Lunes-Viernes: 7:00 AM - 7:00 PM, Sábados: 8:00 AM - 5:00 PM, Domingos: 9:00 AM - 1:00 PM.",
+      precios: "Los precios de nuestros medicamentos varían según el producto. Para información específica sobre precios, te recomiendo contactar directamente con nuestro equipo. ¿Te conecto por WhatsApp?",
+      receta: "Para medicamentos de prescripción necesitas presentar la receta médica. También ofrecemos consultas farmacéuticas para asesoramiento sobre medicamentos.",
+      default: "Gracias por tu consulta. Para darte la mejor atención farmacéutica personalizada, te recomiendo hablar directamente con nuestro equipo. ¿Te conecto por WhatsApp?"
+    };
+    
+    this.init();
+  }
+  
+  init() {
+    if (!this.chatbotToggle || !this.chatbotContainer) {
+      console.warn('Chatbot elements not found');
+      return;
+    }
+    
+    // Show chatbot toggle immediately
+    this.chatbotToggle.style.display = 'flex';
+    this.chatbotToggle.style.opacity = '1';
+    
+    this.bindEvents();
+    console.log('Chatbot initialized successfully! 🤖');
+  }
+  
+  bindEvents() {
+    // Toggle chatbot
+    this.chatbotToggle.addEventListener('click', () => this.toggleChatbot());
+    
+    // Close chatbot
+    this.chatbotClose.addEventListener('click', () => this.closeChatbot());
+    
+    // Send message
+    this.chatbotSend.addEventListener('click', () => this.handleInput());
+    
+    // Enter key support
+    this.chatbotInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        this.handleInput();
+      }
+    });
+    
+    // Quick questions
+    this.quickQuestions.forEach(button => {
+      button.addEventListener('click', () => {
+        const question = button.textContent;
+        this.sendMessage(question, true);
+        const responseKey = button.getAttribute('data-question');
+        setTimeout(() => {
+          this.sendMessage(this.responses[responseKey], false);
+        }, 1000);
+      });
+    });
+  }
+  
+  toggleChatbot() {
+    this.chatbotContainer.classList.toggle('active');
+    if (this.chatbotContainer.classList.contains('active')) {
+      this.chatbotToggle.style.display = 'none';
+      this.chatbotInput.focus();
+    }
+  }
+  
+  closeChatbot() {
+    this.chatbotContainer.classList.remove('active');
+    this.chatbotToggle.style.display = 'flex';
+  }
+  
+  sendMessage(message, isUser = true) {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+    
+    const messageContent = document.createElement('div');
+    messageContent.className = 'message-content';
+    
+    const messageText = document.createElement('p');
+    messageText.textContent = message;
+    messageContent.appendChild(messageText);
+    
+    const messageTime = document.createElement('div');
+    messageTime.className = 'message-time';
+    messageTime.textContent = new Date().toLocaleTimeString('es-ES', { 
+      hour: '2-digit', 
+      minute: '2-digit' 
+    });
+    
+    messageDiv.appendChild(messageContent);
+    messageDiv.appendChild(messageTime);
+    
+    this.chatbotMessages.appendChild(messageDiv);
+    this.chatbotMessages.scrollTop = this.chatbotMessages.scrollHeight;
+    
+    return messageDiv;
+  }
+  
+  botResponse(userMessage) {
+    const lowerMessage = userMessage.toLowerCase();
+    let response = this.responses.default;
+    
+    // Detectar intenciones específicas que requieren WhatsApp
+    if (lowerMessage.includes('medicamento') || lowerMessage.includes('medicina') || lowerMessage.includes('pastilla') || lowerMessage.includes('receta')) {
+      response = this.responses.medicamentos;
+    } else if (lowerMessage.includes('entrega') || lowerMessage.includes('domicilio') || lowerMessage.includes('envio')) {
+      response = this.responses.entrega;
+    } else if (lowerMessage.includes('servicio') || lowerMessage.includes('que ofrecen') || lowerMessage.includes('que hacen')) {
+      response = this.responses.servicios;
+    } else if (lowerMessage.includes('contacto') || lowerMessage.includes('telefono') || lowerMessage.includes('email') || lowerMessage.includes('hablar')) {
+      response = this.responses.contacto;
+    } else if (lowerMessage.includes('ubicacion') || lowerMessage.includes('donde') || lowerMessage.includes('direccion')) {
+      response = this.responses.ubicacion;
+    } else if (lowerMessage.includes('horario') || lowerMessage.includes('hora') || lowerMessage.includes('abierto')) {
+      response = this.responses.horarios;
+    } else if (lowerMessage.includes('precio') || lowerMessage.includes('costo') || lowerMessage.includes('cuanto')) {
+      response = this.responses.precios;
+    } else if (lowerMessage.includes('receta') || lowerMessage.includes('prescripcion')) {
+      response = this.responses.receta;
+    }
+    
+    setTimeout(() => {
+      this.sendMessage(response, false);
+      
+      // Si la respuesta sugiere WhatsApp, agregar botón de WhatsApp
+      if (response.includes('WhatsApp') || response.includes('conecto')) {
+        setTimeout(() => {
+          this.addWhatsAppButton();
+        }, 2000);
+      }
+    }, 1000);
+  }
+  
+  addWhatsAppButton() {
+    const whatsappButton = document.createElement('div');
+    whatsappButton.className = 'message bot-message';
+    whatsappButton.innerHTML = `
+      <div class="message-content" style="text-align: center; padding: 1rem;">
+        <a href="https://wa.me/5073914481?text=Hola%20Galenus%20Panamá,%20me%20interesa%20conocer%20más%20sobre%20sus%20servicios%20farmacéuticos" 
+           target="_blank" rel="noopener noreferrer" 
+           style="background: #25D366; color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; display: inline-block; font-weight: 600;">
+          <i class="fab fa-whatsapp"></i> Conectar por WhatsApp
+        </a>
+      </div>
+    `;
+    this.chatbotMessages.appendChild(whatsappButton);
+    this.chatbotMessages.scrollTop = this.chatbotMessages.scrollHeight;
+  }
+  
+  handleInput() {
+    const message = this.chatbotInput.value.trim();
+    if (message) {
+      this.sendMessage(message, true);
+      this.chatbotInput.value = '';
+      this.botResponse(message);
+    }
+  }
+}
+
 // ===== INITIALIZATION =====
 document.addEventListener('DOMContentLoaded', () => {
   // Initialize all components
@@ -841,9 +1237,14 @@ document.addEventListener('DOMContentLoaded', () => {
   new PerformanceOptimizer();
   new PWAManager();
   new AccessibilityManager();
-  new WhatsAppManager();
+  new CarouselManager();
+  new EnhancedAnimations();
+  new ChatbotManager();
   
   console.log('Galenus Panamá website initialized successfully!');
+  console.log('Carousel initialized! 🎠');
+  console.log('Enhanced Animations initialized! ✨');
+  console.log('Chatbot Charlie Pity initialized! 🤖');
 });
 
 // ===== ERROR HANDLING =====
