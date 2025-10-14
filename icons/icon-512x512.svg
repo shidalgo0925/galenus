@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Fondo circular -->
+  <circle cx="256" cy="256" r="256" fill="#2563eb"/>
+  
+  <!-- Símbolo médico central -->
+  <g transform="translate(256, 256)">
+    <!-- Cruz médica -->
+    <rect x="-16" y="-80" width="32" height="160" fill="white" rx="4"/>
+    <rect x="-80" y="-16" width="160" height="32" fill="white" rx="4"/>
+    
+    <!-- Círculo exterior -->
+    <circle cx="0" cy="0" r="100" fill="none" stroke="white" stroke-width="8"/>
+    
+    <!-- Punto central -->
+    <circle cx="0" cy="0" r="16" fill="white"/>
+  </g>
+  
+  <!-- Texto GALENUS -->
+  <text x="256" y="380" font-family="Inter, sans-serif" font-size="36" font-weight="700" fill="white" text-anchor="middle">GALENUS</text>
+  
+  <!-- Texto PANAMÁ -->
+  <text x="256" y="420" font-family="Inter, sans-serif" font-size="20" font-weight="500" fill="rgba(255,255,255,0.8)" text-anchor="middle">PANAMÁ</text>
+</svg>
+

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" width="200" height="60">
+  <!-- Fondo del logo -->
+  <rect width="200" height="60" fill="#2563eb" rx="8"/>
+  
+  <!-- Texto GALENUS -->
+  <text x="20" y="35" font-family="Inter, sans-serif" font-size="24" font-weight="700" fill="white">GALENUS</text>
+  
+  <!-- Símbolo médico/farmacéutico -->
+  <g transform="translate(140, 15)">
+    <!-- Cruz médica -->
+    <rect x="8" y="0" width="4" height="20" fill="white"/>
+    <rect x="0" y="8" width="20" height="4" fill="white"/>
+    
+    <!-- Círculo alrededor -->
+    <circle cx="10" cy="10" r="15" fill="none" stroke="white" stroke-width="2"/>
+    
+    <!-- Puntos decorativos -->
+    <circle cx="10" cy="10" r="2" fill="white"/>
+  </g>
+  
+  <!-- Texto PANAMÁ -->
+  <text x="20" y="50" font-family="Inter, sans-serif" font-size="12" font-weight="500" fill="rgba(255,255,255,0.8)">PANAMÁ</text>
+</svg>
+
