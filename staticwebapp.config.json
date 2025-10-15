@@ -1,0 +1,61 @@
+{
+  "routes": [
+    {
+      "route": "/",
+      "serve": "/index.html",
+      "statusCode": 200
+    },
+    {
+      "route": "/sitemap.xml",
+      "serve": "/sitemap.xml",
+      "statusCode": 200
+    },
+    {
+      "route": "/robots.txt",
+      "serve": "/robots.txt",
+      "statusCode": 200
+    },
+    {
+      "route": "/manifest.json",
+      "serve": "/manifest.json",
+      "statusCode": 200
+    },
+    {
+      "route": "/sw.js",
+      "serve": "/sw.js",
+      "statusCode": 200
+    }
+  ],
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["/images/*", "/icons/*", "/data/*", "*.{css,js,png,jpg,jpeg,gif,svg,webp,ico}"]
+  },
+  "mimeTypes": {
+    ".json": "application/json",
+    ".webp": "image/webp",
+    ".svg": "image/svg+xml"
+  },
+  "globalHeaders": {
+    "Cache-Control": "public, max-age=31536000, immutable"
+  },
+  "headers": [
+    {
+      "route": "/index.html",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate"
+      }
+    },
+    {
+      "route": "*.{css,js}",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
+      "route": "*.{png,jpg,jpeg,gif,svg,webp,ico}",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000, immutable"
+      }
+    }
+  ]
+}
