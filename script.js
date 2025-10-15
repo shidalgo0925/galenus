@@ -195,7 +195,7 @@ class ThemeManager {
     
     if (navLogo && footerLogo) {
       // Usar el logo PNG en lugar de SVG
-      const logoSrc = 'images/logo.png?v=1';
+      const logoSrc = 'images/logo.png?v=20251015';
       navLogo.src = logoSrc;
       footerLogo.src = logoSrc;
     }
