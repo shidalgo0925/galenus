@@ -676,78 +676,18 @@ class PWAManager {
   }
 
   init() {
-    this.registerServiceWorker();
-    this.setupInstallPrompt();
+    // PWA deshabilitada: no registrar Service Worker ni mostrar banner de instalación
   }
 
-  async registerServiceWorker() {
-    if ('serviceWorker' in navigator) {
-      try {
-        const registration = await navigator.serviceWorker.register('/sw.js');
-        console.log('Service Worker registered successfully:', registration);
-      } catch (error) {
-        console.log('Service Worker registration failed:', error);
-      }
-    }
-  }
+  async registerServiceWorker() {}
 
-  setupInstallPrompt() {
-    let deferredPrompt;
-    
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      
-      // Show install button or banner
-      this.showInstallBanner();
-    });
+  setupInstallPrompt() {}
 
-    window.addEventListener('appinstalled', () => {
-      console.log('PWA was installed');
-      this.hideInstallBanner();
-    });
-  }
+  showInstallBanner() {}
 
-  showInstallBanner() {
-    // Create install banner
-    const banner = document.createElement('div');
-    banner.className = 'install-banner';
-    banner.innerHTML = `
-      <div class="install-banner__content">
-        <i class="fas fa-download"></i>
-        <span>Instala Galenus Panamá en tu dispositivo</span>
-        <button class="install-banner__btn">Instalar</button>
-        <button class="install-banner__close">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-    `;
-    
-    document.body.appendChild(banner);
-    
-    // Add event listeners
-    const installBtn = banner.querySelector('.install-banner__btn');
-    const closeBtn = banner.querySelector('.install-banner__close');
-    
-    installBtn.addEventListener('click', () => this.installApp());
-    closeBtn.addEventListener('click', () => this.hideInstallBanner());
-  }
+  hideInstallBanner() {}
 
-  hideInstallBanner() {
-    const banner = document.querySelector('.install-banner');
-    if (banner) {
-      banner.remove();
-    }
-  }
-
-  async installApp() {
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      console.log(`User response to the install prompt: ${outcome}`);
-      deferredPrompt = null;
-    }
-  }
+  async installApp() {}
 }
 
 // ===== ACCESSIBILITY ENHANCEMENTS =====
