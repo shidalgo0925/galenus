@@ -12,13 +12,20 @@ const categoryBtns = document.querySelectorAll('.category-btn');
 const productCards = document.querySelectorAll('.product-card');
 
 // ===== EMAILJS CONFIGURATION =====
-// Configuración de EmailJS (reemplaza con tus credenciales reales)
+// Configuración de EmailJS - REEMPLAZA CON TUS CREDENCIALES REALES
 const EMAILJS_CONFIG = {
-  serviceId: 'service_galenus', // Reemplaza con tu Service ID
-  templateId: 'template_contact', // Reemplaza con tu Template ID
-  newsletterTemplateId: 'template_newsletter', // Reemplaza con tu Newsletter Template ID
-  publicKey: 'your_public_key' // Reemplaza con tu Public Key
+  serviceId: 'service_galenus', // ⚠️ REEMPLAZA: Tu Service ID de EmailJS
+  templateId: 'template_contact', // ⚠️ REEMPLAZA: Tu Template ID para contacto
+  newsletterTemplateId: 'template_newsletter', // ⚠️ REEMPLAZA: Tu Template ID para newsletter
+  publicKey: 'your_public_key' // ⚠️ REEMPLAZA: Tu Public Key de EmailJS
 };
+
+// 📧 INSTRUCCIONES PARA CONFIGURAR:
+// 1. Ve a https://www.emailjs.com/
+// 2. Crea una cuenta gratuita
+// 3. Agrega un servicio de email (Gmail/Outlook)
+// 4. Crea los templates de email
+// 5. Copia las credenciales y reemplaza los valores arriba
 
 // ===== EMAIL MANAGER =====
 class EmailManager {
